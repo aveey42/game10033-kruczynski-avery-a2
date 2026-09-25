@@ -34,15 +34,17 @@ namespace MohawkGame2D
         public void Update()
         {
 
-            //check if light switch has been clicked and increase stanley's position
+            //check if light switch has been clicked
             if (Input.GetMouseX() >= 35 && Input.GetMouseX () <=75 && Input.GetMouseY() >=210 && Input.GetMouseY () >= 246 && Input.IsMouseButtonDown(MouseButton.Left) == true && lights_out == false)
             {
                 lights_out = true;
-                stanley_phase =+ 1;
+                
             }
             else if (Input.GetMouseX() >= 35 && Input.GetMouseX() <= 75 && Input.GetMouseY() >= 185 && Input.GetMouseY() <= 246 && Input.IsMouseButtonDown(MouseButton.Left) == true && lights_out == true)
             {
                 lights_out = false;
+                // Change Stanley Phase 
+                stanley_phase = +1;
             }
 
 
@@ -55,7 +57,7 @@ namespace MohawkGame2D
                 Draw.SetLineColor(0);
                 Draw.SetLineSize(0);
 
-                // Draw the cat
+                // Cat
                 // A1 - Body
                 Draw.SetFillColor(255, 255, 255);
                 Draw.Rectangle(130, 200, 140, 200);
@@ -91,46 +93,8 @@ namespace MohawkGame2D
                 // Pupil Left
                 Draw.SetFillColor(0);
                 Draw.Ellipse(pupil_left_x, pupil_left_y, 10, 30);
-                if (pupil_left_x >= 140 && pupil_left_x <= 180)
-                {
-                    pupil_left_x += 100 * Time.DeltaTime;
-                }
-                if (Input.IsKeyboardKeyDown(KeyboardKey.Left) == true)
-                {
-                    pupil_left_x -= 100 * Time.DeltaTime;
-                }
-
-                if (Input.IsKeyboardKeyDown(KeyboardKey.Down) == true)
-                {
-                    pupil_left_y += 100 * Time.DeltaTime;
-                }
-                if (Input.IsKeyboardKeyDown(KeyboardKey.Up) == true)
-                {
-                    pupil_left_y -= 100 * Time.DeltaTime;
-                }
-
-                // Right Pupil
                 Draw.Ellipse(pupil_right_x, pupil_right_y, 10, 30);
-                if (Input.IsKeyboardKeyDown(KeyboardKey.Right) == true)
-                {
-                    pupil_right_x += 100 * Time.DeltaTime;
-                }
-                if (Input.IsKeyboardKeyDown(KeyboardKey.Left) == true)
-                {
-                    pupil_right_x -= 100 * Time.DeltaTime;
-                }
 
-                if (Input.IsKeyboardKeyDown(KeyboardKey.Down) == true)
-                {
-                    pupil_right_y += 100 * Time.DeltaTime;
-                }
-                if (Input.IsKeyboardKeyDown(KeyboardKey.Up) == true)
-                {
-                    pupil_right_y -= 100 * Time.DeltaTime;
-                }
-
-                //Draw.Ellipse(160, 240, 10, 30);
-                //Draw.Ellipse(240, 240, 10, 30);
 
                 // G1 - Nose
                 Draw.SetFillColor(245, 157, 244);
@@ -140,6 +104,7 @@ namespace MohawkGame2D
                 Draw.Line(200, 280, 200, 290);
                 // ask raph how to do curved half lines
 
+                //Light Switch
                 // I1 - Light Switch Cover
                 Draw.SetFillColor(255, 255, 255);
                 Draw.Rectangle(30, 180, 40, 120);
@@ -149,8 +114,9 @@ namespace MohawkGame2D
                 Draw.Rectangle(35, 185, 30, 110);
                 Draw.SetFillColor(175, 175, 175);
                 Draw.Rectangle(35, 185, 30, 55);
+
             }
-            if (lights_out == true)
+            if (lights_out == true && stanley_phase == 0)
             {
                 Window.ClearBackground(0);
 
@@ -158,12 +124,13 @@ namespace MohawkGame2D
                 Draw.SetLineSize(1);
                 Draw.SetLineColor(255, 255, 255);
 
+                // Cat
                 // A2 - Inner Ears
                 Draw.SetFillColor(0);
                 Draw.Triangle(140, 170, 140, 200, 170, 200);
                 Draw.Triangle(260, 170, 260, 200, 230, 200);
 
-                // B21 Outline
+                // B2 Outline
                 Draw.Line(130, 400, 130, 140);
                 Draw.Line(130, 140, 180, 200);
                 Draw.Line(180, 200, 220, 200);
@@ -188,7 +155,8 @@ namespace MohawkGame2D
                 // F2 - Mouth
                 Draw.Line(200, 280, 200, 290);
                 // ask raph how to do curved half lines
-
+                
+                // Light Switch
                 // G2 - Light Switch Cover
                 Draw.Rectangle(30, 180, 40, 120);
 
@@ -198,18 +166,149 @@ namespace MohawkGame2D
                 Draw.SetFillColor(0);
                 Draw.Rectangle(35, 185, 30, 55);
 
-                // I2 - Stanley
+                // Stanley
                 Draw.SetLineSize(0);
-                Draw.SetFillColor(50, 50, 50);
+                Draw.SetFillColor(202, 0, 0, 50);
+
+                // Stanley Eyes
                 Draw.Circle(50, 80, 10);
                 Draw.Circle(90, 80, 10);
-                // smile goes here
-            }
-            //else if (stanley_phase == 1)
-            //{
 
-            //}
+                // Stanley Smile
+
+               
             }
+            else if ( lights_out == true && stanley_phase == 1)
+            {
+                Window.ClearBackground(0);
+
+                // Remove outlines and set outline colour to white
+                Draw.SetLineSize(1);
+                Draw.SetLineColor(255, 255, 255);
+
+
+                // Cat
+                // A3 - Inner Ears
+                Draw.SetFillColor(0);
+                Draw.Triangle(140, 170, 140, 200, 170, 200);
+                Draw.Triangle(260, 170, 260, 200, 230, 200);
+
+                // B3 Outline
+                Draw.Line(130, 400, 130, 140);
+                Draw.Line(130, 140, 180, 200);
+                Draw.Line(180, 200, 220, 200);
+                Draw.Line(220, 200, 270, 140);
+                Draw.Line(270, 140, 270, 400);
+
+                // C3 - Eyes
+                Draw.SetFillColor(0);
+                Draw.Circle(160, 240, 20);
+                Draw.Circle(240, 240, 20);
+
+                // D3 - Pupils
+                // Pupil Left
+                Draw.SetFillColor(255, 255, 255);
+                Draw.Circle(170, 240, 10);
+                Draw.Circle(250, 240, 10);
+
+                // E3 - Nose
+                Draw.SetFillColor(0);
+                Draw.Triangle(190, 260, 210, 260, 200, 280);
+
+                // F3 - Mouth
+                Draw.Line(200, 280, 200, 290);
+                // ask raph how to do curved half lines
+
+                
+                // Light Switch
+                // G3 - Light Switch Cover
+                Draw.Rectangle(30, 180, 40, 120);
+
+                // H3 - Light Switch
+                Draw.SetFillColor(85, 85, 85);
+                Draw.Rectangle(35, 185, 30, 110);
+                Draw.SetFillColor(0);
+                Draw.Rectangle(35, 185, 30, 55);
+
+                // Stanley
+                Draw.SetLineSize(0);
+                Draw.SetFillColor(202, 0, 0, 80);
+
+                
+                Draw.Circle(310,260,15);
+                Draw.Circle(360, 260, 15);
+
+                // - Stanley Smile
+
+                
+            }
+            else if (lights_out == true && stanley_phase <= 2)
+            {
+                Window.ClearBackground(0);
+
+                // Remove outlines and set outline colour to white
+                Draw.SetLineSize(1);
+                Draw.SetLineColor(255, 255, 255);
+
+                //  - Inner Ears
+                Draw.SetFillColor(0);
+                Draw.Triangle(140, 170, 140, 200, 170, 200);
+                Draw.Triangle(260, 170, 260, 200, 230, 200);
+
+                //  Outline
+                Draw.Line(130, 400, 130, 140);
+                Draw.Line(130, 140, 180, 200);
+                Draw.Line(180, 200, 220, 200);
+                Draw.Line(220, 200, 270, 140);
+                Draw.Line(270, 140, 270, 400);
+
+                //  - Eyes
+                Draw.SetFillColor(0);
+                Draw.Circle(170, 240, 20);
+                Draw.Circle(250, 240, 20);
+
+                //  - Pupils
+                // Pupil Left
+                Draw.SetFillColor(255, 255, 255);
+                Draw.Circle(160, 240, 16);
+                Draw.Circle(240, 240, 16);
+
+                //  - Nose
+                Draw.SetFillColor(0);
+                Draw.Triangle(190, 260, 210, 260, 200, 280);
+
+                //  - Mouth
+                Draw.Line(200, 280, 200, 290);
+                Draw.Line(200, 290, 180, 310);
+                Draw.Line(200, 290, 220, 310);
+
+                //  - Light Switch Cover
+                Draw.Rectangle(30, 180, 40, 120);
+
+                //  - Light Switch
+                Draw.SetFillColor(85, 85, 85);
+                Draw.Rectangle(35, 185, 30, 110);
+                Draw.SetFillColor(0);
+                Draw.Rectangle(35, 185, 30, 55);
+
+                //  Stanley
+                Draw.SetLineSize(1);
+                Draw.SetFillColor(202, 0, 0);
+                
+                // - Eyes
+                Draw.Circle(120,60,40);
+                Draw.Circle(280,60,40);
+
+                // - Pupils
+                Draw.SetFillColor(255, 255, 255);
+                Draw.Circle(120, 80, 20);
+                Draw.Circle(280, 80, 20);
+
+                // - Smile
+
+
+            }
+        }
             
         }
 
