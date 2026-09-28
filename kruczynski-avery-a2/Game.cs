@@ -10,10 +10,14 @@ namespace MohawkGame2D
     /// </summary>
     public class Game
     {
-        // Variables go here
+        // Functioning variables
         int stanley_phase = 0;
         bool lights_out = false;
+
+        // attempt at making the cat blink at random or fixed intervals
         bool blinking = false;
+
+        // attempt at making the cat's eyes follow mouse cursor.
         float pupil_left_x = 160;
         float pupil_left_y = 240;
         float pupil_right_x = 240;
@@ -208,6 +212,8 @@ namespace MohawkGame2D
 
                 // F2 - Mouth
                 Draw.Line(200, 280, 200, 290);
+                //Draw.;
+                //Draw.Arc(190, 300, 20, 10, 200, 180, false);
                 // ask raph how to do curved half lines
                 
                 // Light Switch
