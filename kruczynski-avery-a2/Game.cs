@@ -48,7 +48,7 @@ namespace MohawkGame2D
             else if (Input.GetMouseX() >= 35 && Input.GetMouseX() <= 75 && Input.GetMouseY() >= 185 && Input.GetMouseY() <= 246 && Input.IsMouseButtonDown(MouseButton.Left) == true && lights_out == true)
             {
                 lights_out = false;
-                stanley_phase += 1;
+                stanley_phase += 1; // For some ungodly reason, setting it to '+1' would cause the sequencing of the drawings to load incorrectly. Adding '+=" fixed this issue.
             }
             
 
@@ -93,8 +93,10 @@ namespace MohawkGame2D
                 Draw.Triangle(190, 260, 210, 260, 200, 280);
 
                 // F1 - Mouth
+                Draw.SetFillColor(255, 255, 255);
                 Draw.Line(200, 280, 200, 290);
-                // ask raph how to do curved half lines
+                Draw.Arc(190,290, 20, 20, 0, 180, false);
+                Draw.Arc(209, 290, 20, 20, 0, 180, false);
 
                 //Light Switch
                 // G1 - Light Switch Cover
@@ -107,6 +109,7 @@ namespace MohawkGame2D
                 Draw.SetFillColor(175, 175, 175);
                 Draw.Rectangle(35, 185, 30, 55);
 
+                // Scrapped if statement meant for blinking implementation
                 if (blinking == false) 
                 {
                     // I1 - Eyes
@@ -159,8 +162,10 @@ namespace MohawkGame2D
                     Draw.Triangle(190, 260, 210, 260, 200, 280);
 
                     // F1 - Mouth
+                    Draw.SetFillColor(255, 255, 255);
                     Draw.Line(200, 280, 200, 290);
-                    // ask raph how to do curved half lines
+                    Draw.Arc(190, 290, 20, 20, 0, 180, false);
+                    Draw.Arc(209, 290, 20, 20, 0, 180, false);
 
                     //Light Switch
                     // G1 - Light Switch Cover
@@ -211,11 +216,11 @@ namespace MohawkGame2D
                 Draw.Triangle(190, 260, 210, 260, 200, 280);
 
                 // F2 - Mouth
+                Draw.SetFillColor(0);
                 Draw.Line(200, 280, 200, 290);
-                //Draw.;
-                //Draw.Arc(190, 300, 20, 10, 200, 180, false);
-                // ask raph how to do curved half lines
-                
+                Draw.Arc(190, 290, 20, 20, 0, 180, false);
+                Draw.Arc(209, 290, 20, 20, 0, 180, false);
+
                 // Light Switch
                 // G2 - Light Switch Cover
                 Draw.Rectangle(30, 180, 40, 120);
@@ -227,14 +232,18 @@ namespace MohawkGame2D
                 Draw.Rectangle(35, 185, 30, 55);
 
                 // Stanley
+
+                // Mouth (Has to come first so eyes remain circular and aren't covered by mouth
+                Draw.SetLineSize(1);
+                Draw.SetLineColor(255,255,255, 50);
+                Draw.SetFillColor(0, 50);
+                Draw.Arc(70, 90, 80, 40, 180, 0, false);
+
+                // Eyes
                 Draw.SetLineSize(0);
                 Draw.SetFillColor(202, 0, 0, 50);
-
-                // Stanley Eyes
                 Draw.Circle(50, 80, 10);
                 Draw.Circle(90, 80, 10);
-
-                // Stanley Smile
 
             }
             else if ( lights_out == true && stanley_phase == 1)
@@ -275,10 +284,12 @@ namespace MohawkGame2D
                 Draw.Triangle(190, 260, 210, 260, 200, 280);
 
                 // F3 - Mouth
+                Draw.SetFillColor(0);
                 Draw.Line(200, 280, 200, 290);
-                // ask raph how to do curved half lines
+                Draw.Arc(190, 290, 20, 20, 0, 180, false);
+                Draw.Arc(209, 290, 20, 20, 0, 180, false);
 
-                
+
                 // Light Switch
                 // G3 - Light Switch Cover
                 Draw.Rectangle(30, 180, 40, 120);
@@ -290,14 +301,18 @@ namespace MohawkGame2D
                 Draw.Rectangle(35, 185, 30, 55);
 
                 // Stanley
+
+                //Mouth
+                Draw.SetLineSize(1);
+                Draw.SetLineColor(255,255,255, 80);
+                Draw.SetFillColor(0);
+                Draw.Arc(336, 275, 100, 60, 180, 0, false);
+
+                //Eyes
                 Draw.SetLineSize(0);
                 Draw.SetFillColor(202, 0, 0, 80);
-
-                
-                Draw.Circle(310,260,15);
+                Draw.Circle(310, 260, 15);
                 Draw.Circle(360, 260, 15);
-
-                // - Stanley Smile
             }
             else if (lights_out == true && stanley_phase == 2)
             {
@@ -307,62 +322,83 @@ namespace MohawkGame2D
                 Draw.SetLineSize(1);
                 Draw.SetLineColor(255, 255, 255);
 
-                //  - Inner Ears
+                // Stanley (has to come first so his smile stays behind the cat and doesnt go overtop
+
+                // A3 - Mouth
+                Draw.SetLineSize(1);
+                Draw.SetFillColor(0);
+                Draw.Arc(210, 110, 275,150, 180, 0, false);
+
+
+                // B3 - Eyes
+                Draw.SetLineSize(1);
+                Draw.SetFillColor(202, 0, 0);
+                Draw.Circle(120, 60, 40);
+                Draw.Circle(280, 60, 40);
+
+                // C3 - Pupils
+                Draw.SetFillColor(255, 255, 255);
+                Draw.Circle(120, 80, 20);
+                Draw.Circle(280, 80, 20);
+
+                //Cat
+
+                // Have to remake ears so they are a solid object for this drawing as well
+
+                // E3 - Ears
+                Draw.SetLineSize(0);
+                Draw.SetFillColor(0);
+                Draw.Triangle(130, 140, 180, 200, 130, 200);
+                Draw.SetFillColor(0);
+                Draw.Triangle(270, 140, 270, 200, 220, 200);
+
+                // add back outlines
+                Draw.SetLineSize(1);
+
+                //  F3 - Inner Ears
                 Draw.SetFillColor(0);
                 Draw.Triangle(140, 170, 140, 200, 170, 200);
                 Draw.Triangle(260, 170, 260, 200, 230, 200);
+                Draw.SetLineColor(255,255,255);
 
-                //  Outline
+                // G3 - Outline
                 Draw.Line(130, 400, 130, 140);
                 Draw.Line(130, 140, 180, 200);
                 Draw.Line(180, 200, 220, 200);
                 Draw.Line(220, 200, 270, 140);
                 Draw.Line(270, 140, 270, 400);
 
-                //  - Eyes
+                // H3 - Eyes
                 Draw.SetFillColor(0);
                 Draw.Circle(160, 240, 20);
                 Draw.Circle(240, 240, 20);
 
-                //  - Pupils
+                // I3 - Pupils
                 // Pupil Left
                 Draw.SetFillColor(255, 255, 255);
                 Draw.Circle(160, 240, 16);
                 Draw.Circle(240, 240, 16);
 
-                //  - Nose
+                // J3 - Nose
                 Draw.SetFillColor(0);
                 Draw.Triangle(190, 260, 210, 260, 200, 280);
 
-                //  - Mouth
+                // K3 - Mouth
+                Draw.SetLineColor(255,255,255);
                 Draw.Line(200, 280, 200, 290);
                 Draw.Line(200, 290, 180, 310);
                 Draw.Line(200, 290, 220, 310);
 
-                //  - Light Switch Cover
+                // Light Switch
+                // G3 - Light Switch Cover
+                Draw.SetLineColor(255, 255, 255);
                 Draw.Rectangle(30, 180, 40, 120);
 
-                //  - Light Switch
+                // H3 - Light Switch
                 Draw.SetFillColor(85, 85, 85);
                 Draw.Rectangle(35, 185, 30, 110);
                 Draw.SetFillColor(0);
                 Draw.Rectangle(35, 185, 30, 55);
-
-                //  Stanley
-                Draw.SetLineSize(1);
-                Draw.SetFillColor(202, 0, 0);
-                
-                // - Eyes
-                Draw.Circle(120,60,40);
-                Draw.Circle(280,60,40);
-
-                // - Pupils
-                Draw.SetFillColor(255, 255, 255);
-                Draw.Circle(120, 80, 20);
-                Draw.Circle(280, 80, 20);
-
-                // - Smile
-
 
             }
         }
